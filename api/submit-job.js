@@ -4,6 +4,7 @@ const multer = require('multer');
 const nodemailer = require('nodemailer');
 const path = require('path');
 const cors = require('cors');
+
 app.use(cors());
 // Multer memory storage for file upload (Vercel doesn't support file system writes)
 const upload = multer({

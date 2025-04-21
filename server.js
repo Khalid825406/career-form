@@ -9,6 +9,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/",(req,res)=>{
+    res.send("Api Working...")
+})
+
 // Multer setup for file storage
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -39,9 +43,6 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-app.get("/", (req, res) => {
-  res.send('Welcome to the Job Application API!')
-})
 
 // POST API for form submission
 app.post('/apply', upload.single('resume'), (req, res) => {

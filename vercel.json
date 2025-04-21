@@ -1,7 +1,16 @@
 {
     "version": 2,
     "builds": [
-      { "src": "api/apply.js", "use": "@vercel/node" }
+      {
+        "src": "api/submit-job.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/submit-job",
+        "dest": "/api/submit-job.js"
+      }
     ]
   }
   

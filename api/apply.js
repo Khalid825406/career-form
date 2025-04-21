@@ -2,7 +2,7 @@ const multer = require('multer');
 const nodemailer = require('nodemailer');
 const path = require('path');
 
-// Multer memory storage (Vercel doesn't allow file system write)
+// Multer memory storage for file upload (Vercel doesn't support file system writes)
 const upload = multer({
   storage: multer.memoryStorage(),
   fileFilter: (req, file, cb) => {
@@ -11,14 +11,14 @@ const upload = multer({
     }
     cb(null, true);
   }
-}).single('resume');
+}).single('resume'); // 'resume' is the form field name for file upload
 
-// Nodemailer transporter
+// Nodemailer transporter setup
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.GMAIL_APP_USER,
-    pass: process.env.GMAIL_APP_PASSWORD
+    user: process.env.GMAIL_APP_USER, // Gmail user
+    pass: process.env.GMAIL_APP_PASSWORD // Gmail app password
   }
 });
 
@@ -31,13 +31,14 @@ module.exports = (req, res) => {
     const { name, email, position } = req.body;
     const resume = req.file;
 
+    // Basic validation
     if (!name || !email || !position || !resume) {
       return res.status(400).json({ message: 'All fields are required.' });
     }
 
     const mailOptions = {
-      from: process.env.GMAIL_APP_USER,
-      to: process.env.GMAIL_APP_USER,
+      from: process.env.GMAIL_APP_USER, // Sender address
+      to: process.env.GMAIL_APP_USER, // Receiver address (same as sender for demo purposes)
       subject: `New Job Application - ${position}`,
       text: `New application received:\n\nName: ${name}\nEmail: ${email}\nPosition: ${position}`,
       attachments: [

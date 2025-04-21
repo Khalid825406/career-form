@@ -39,6 +39,10 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+app.get("/", (req, res) => {
+  res.send('Welcome to the Job Application API!')
+})
+
 // POST API for form submission
 app.post('/apply', upload.single('resume'), (req, res) => {
   const { name, email, position } = req.body;

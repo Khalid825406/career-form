@@ -38,7 +38,7 @@ const upload = multer({
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'ka1239996@gmail.com',         // ⚠️ Replace with your Gmail
+    user: process.env.GMAIL_APP_USER,         // ⚠️ Replace with your Gmail
     pass: process.env.GMAIL_APP_PASSWORD    // ⚠️ Replace with your Gmail App Password
   }
 });
@@ -54,8 +54,8 @@ app.post('/apply', upload.single('resume'), (req, res) => {
   }
 
   const mailOptions = {
-    from: 'ka1239996@gmail.com',
-    to: 'ka1239996@gmail.com',    // ⚠️ Can be same or HR email
+    from: process.env.GMAIL_APP_USER,
+    to: process.env.GMAIL_APP_USER,    // ⚠️ Can be same or HR email
     subject: `New Job Application - ${position}`,
     text: `New application received:\n\nName: ${name}\nEmail: ${email}\nPosition: ${position}`,
     attachments: [

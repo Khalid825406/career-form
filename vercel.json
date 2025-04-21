@@ -4,12 +4,20 @@
       {
         "src": "api/submit-job.js",
         "use": "@vercel/node"
+      },
+      {
+        "src": "api/index.js",
+        "use": "@vercel/node"
       }
     ],
     "routes": [
       {
         "src": "/api/submit-job",
         "dest": "/api/submit-job.js"
+      },
+      {
+        "src": "/",
+        "dest": "/api/index.js"
       }
     ]
   }
